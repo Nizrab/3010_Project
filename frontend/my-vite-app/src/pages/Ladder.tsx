@@ -1,13 +1,12 @@
 import React from 'react';
-import { CssVarsProvider, useColorScheme } from '@mui/joy/styles';
-import Sheet from '@mui/joy/Sheet';
+import { Box, Typography } from '@mui/joy';
+import SalaryGraph from '../components/SalaryGraph'; // adjust the path as necessary
 
 const Ladder: React.FC = () => {
   return (
-      <div style={{ padding: '1rem' }}>
-          <h2>Welcome to the step ladder!</h2>
-          <p>This is your home page. Start building your app here.</p>
-      </div>
+    <Box sx={{ mt: 4 }}>
+      <SalaryGraph />
+    </Box>
   );
 };
 

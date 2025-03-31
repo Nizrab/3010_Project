@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 # Import your snapshot router.
 # Make sure you have created backend/app/routes/snapshot.py with a router variable.
 from app.routes.snapshot import router as snapshot_router
+from app.routes.tax import router as tax_router
 
 app = FastAPI(title="Financial Snapshot API")
 
@@ -23,7 +24,7 @@ app.add_middleware(
 
 # Include your snapshot routes under the /api prefix.
 app.include_router(snapshot_router, prefix="/api")
-
+app.include_router(tax_router, prefix="/api")
 
 # Entry point for running the app.
 if __name__ == "__main__":

@@ -21,6 +21,9 @@ class Snapshot:
                 self.weekly_hours = self.default_weekly_hours
             elif self.weekly_income is not None or self.yearly_income is not None:
                 self.weekly_hours = 40  # Assumed for white collar or contract workers
+            else:
+                # Fallback if nothing is provided
+                self.weekly_hours = self.default_weekly_hours
 
         # Compute hourly_rate if missing
         if self.hourly_rate is None:
@@ -28,6 +31,8 @@ class Snapshot:
                 self.hourly_rate = self.weekly_income / self.weekly_hours
             elif self.yearly_income is not None and self.weekly_hours:
                 self.hourly_rate = self.yearly_income / (self.weekly_hours * 52)
+            else:
+                self.hourly_rate = 30
 
         # Compute weekly_income if missing
         if self.weekly_income is None:
@@ -65,7 +70,16 @@ class Snapshot:
             "In 5 years you will have made": self.yearly_income * 5 if self.yearly_income is not None else None,
             "In 10 years you will have made": self.yearly_income * 10 if self.yearly_income is not None else None,
             "In 15 years you will have made": self.yearly_income * 15 if self.yearly_income is not None else None,
-        }       
+        }   
+
+    def timeBank(self):
+        return {
+            "2025 Toyota Corolla LE 4dr Sedan": self.hours_to_purchase(23970),
+            "A brand new house in Ontario": self.hours_to_purchase(834050),
+            "A movie night out with some friends": self.hours_to_purchase(12.99),
+            "Dinner at a decent restaurant": self.hours_to_purchase(40), 
+        }    
+    
         
 
     def hours_to_purchase(self, item_cost):

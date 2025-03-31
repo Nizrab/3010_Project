@@ -24,8 +24,10 @@ def create_snapshot(data: SalaryInput):
             yearly_income=data.yearly_income, 
         ) 
         breakdown = snap.breakdown() 
+        projections = snap.projections()
+        timeBank = snap.timeBank()
     except Exception as e: 
         raise HTTPException(status_code=400, detail=str(e))
     
-    return {"breakdown": breakdown} 
+    return {"breakdown": breakdown, "projections": projections, "timeBank": timeBank,} 
     

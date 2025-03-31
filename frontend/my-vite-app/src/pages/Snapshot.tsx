@@ -11,29 +11,31 @@ interface SnapshotData {
       Daily: number;
       Hourly: number;
     };
+    projections: {
+      FifteenYears: number;
+      TenYears: number;
+      FiveYears: number;
+    };
+    timeBank: {
+      Dinner: number;
+      MovieNight: number;
+      NewHouse: number;
+      NewCar: number;
+    };
   }
 
-interface SnapshotProj {
-  projections: {
-    FifteenYears: number;
-    TenYears: number;
-    FiveYears: number;
-  }
-}
 
 const Snapshot: React.FC = () => {
   // Example data for each grid cell; in a real app this might come from an API.
   
   const [data, setData] = useState<SnapshotData | null>(null);
 
-  const [projData, setProjData] = useState<SnapshotProj | null>(null);
-
   useEffect(() => {
     fetch("http://localhost:8000/api/snapshot", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ 
-        yearly_income: 60000, 
+        hourly_rate: 24.18, 
        }), // or include other fields if needed
     })
       .then((res) => res.json())
@@ -63,6 +65,7 @@ const Snapshot: React.FC = () => {
         <Typography>
           Salary Breakdown
         </Typography>
+        <hr />
       </Box>
       {data ? (
         <Box
@@ -77,7 +80,7 @@ const Snapshot: React.FC = () => {
           ))}
         </Box>
       ) : (
-        <Typography level="body1" textAlign="center">
+        <Typography level="body-md" textAlign="center">
           Loading...
         </Typography>
       )}
@@ -86,7 +89,49 @@ const Snapshot: React.FC = () => {
         <Typography>
           Projections 
         </Typography>
+        <hr />
       </Box>
+      {data ? (
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: 2,
+          }}
+        >
+          {Object.entries(data.projections).map(([key, value], index) => (
+            <SnapCell key={index} title={key} content={`$${value.toFixed(2)}`} />
+          ))}
+        </Box>
+      ) : (
+        <Typography level="body-md" textAlign="center">
+          Loading...
+        </Typography>
+      )}
+
+      <Box>
+        <Typography>
+          Time Bank 
+        </Typography>
+        <hr />
+      </Box>
+      {data ? (
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: 2,
+          }}
+        >
+          {Object.entries(data.timeBank).map(([key, value], index) => (
+            <SnapCell key={index} title={key} content={`${value.toFixed(2)} hours`} />
+          ))}
+        </Box>
+      ) : (
+        <Typography level="body-md" textAlign="center">
+          Loading...
+        </Typography>
+      )}
     </Box>
   );
 };

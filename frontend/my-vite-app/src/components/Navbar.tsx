@@ -83,17 +83,11 @@ const Navbar: React.FC = () => {
         <Button component={RouterLink} to="/pages/home" variant="plain" sx={navbarButtonStyles}>
           Home
         </Button>
-        <Button component={RouterLink} to="/pages/Snapshot" variant="plain" sx={navbarButtonStyles}>
+        <Button component={RouterLink} to="/pages/SnapshotLive" variant="plain" sx={navbarButtonStyles}>
           Financial Snapshot
-        </Button>
-        <Button component={RouterLink} to="/pages/Debt" variant="plain" sx={navbarButtonStyles}>
-          Debt Calculator
         </Button>
         <Button component={RouterLink} to="/pages/Ladder" variant="plain" sx={navbarButtonStyles}>
           Step Ladder
-        </Button>
-        <Button component={RouterLink} to="/pages/home" variant="plain" sx={navbarButtonStyles}>
-          Budget (Coming Soon)
         </Button>
       </Box>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>

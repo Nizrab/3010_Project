@@ -3,7 +3,7 @@ import { Sheet, Typography } from '@mui/joy';
 
 interface SnapCellProps {
   title: string;
-  content: string;
+  content: React.ReactNode;
 }
 
 const SnapCell: React.FC<SnapCellProps> = ({ title, content }) => {
@@ -21,10 +21,10 @@ const SnapCell: React.FC<SnapCellProps> = ({ title, content }) => {
         justifyContent: 'center',
       }}
     >
-      <Typography level="h5" textAlign="center">
+      <Typography level="h4" textAlign="center">
         {title}
       </Typography>
-      <Typography level="body2" textAlign="center">
+      <Typography level="body-md" textAlign="center">
         {content}
       </Typography>
     </Sheet>
